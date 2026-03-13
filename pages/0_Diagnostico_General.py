@@ -10,6 +10,7 @@ def cargar_datos():
     # Buscamos el archivo subido (asegúrate de que en GitHub se llame 'dane.csv')
     ruta_csv = os.path.join(os.path.dirname(__file__), '..', 'dane.csv')
     
+    
     if os.path.exists(ruta_csv):
         try:
             # Leemos el CSV original
