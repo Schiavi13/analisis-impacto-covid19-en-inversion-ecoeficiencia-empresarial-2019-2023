@@ -51,5 +51,11 @@ if not df.empty:
         fig2.update_layout(xaxis=dict(tickmode='linear', dtick=1),
                            legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1))
         st.plotly_chart(fig2, use_container_width=True)
+        csv_sec = df_sec.groupby('anio').agg(
+            Empresas=('id_empresa','nunique'), Gasto=('gastos_totales','sum'),
+            Amb=('gasto_gestion_amb','sum'), Ingresos=('total_ingresos','sum')
+        ).reset_index().to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Descargar datos del sector", csv_sec,
+                           f"sector_{sector.replace(' ','_')}.csv", "text/csv")
 else:
     st.warning("No hay datos.")

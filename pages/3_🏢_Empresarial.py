@@ -53,7 +53,11 @@ if not df.empty:
         st.plotly_chart(fig2, use_container_width=True)
 
     with tab3:
-        st.dataframe(df_emp[['anio','total_ingresos','gastos_totales','gasto_gestion_amb','personal_ocupado_total']],
-                     use_container_width=True, hide_index=True)
+        ds_export = df_emp[['anio','total_ingresos','gastos_totales','gasto_gestion_amb','personal_ocupado_total']]
+        st.dataframe(ds_export, use_container_width=True, hide_index=True)
+        csv_emp = ds_export.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Descargar datos empresa", csv_emp,
+                           f"empresa_{id_sel}.csv", "text/csv")
+
 else:
     st.warning("Datos no disponibles.")

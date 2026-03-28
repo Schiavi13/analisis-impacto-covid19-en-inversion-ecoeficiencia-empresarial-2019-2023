@@ -90,5 +90,9 @@ if not df.empty:
         dt['%_Amb'] = (dt['Gasto_Amb'] / dt['Gasto_Total'] * 100).round(1).fillna(0)
         st.dataframe(dt, use_container_width=True, hide_index=True)
         st.info("**% Amb:** porcentaje del gasto sectorial destinado a gestión ambiental.")
+        csv_dt = dt.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Descargar tabla como CSV", csv_dt,
+                           f"diagnostico_sectorial_{anio}.csv", "text/csv")
+
 else:
     st.error("❌ No se pudo cargar 'datos_unificados.csv'.")
