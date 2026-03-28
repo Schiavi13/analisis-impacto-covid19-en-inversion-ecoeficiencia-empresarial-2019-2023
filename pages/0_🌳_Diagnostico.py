@@ -17,7 +17,15 @@ st.caption("Panorama macroeconómico y ambiental del ecosistema empresarial colo
 df = cargar_datos()
 if not df.empty:
     anios = sorted(df['anio'].unique(), reverse=True)
-    anio = st.sidebar.selectbox("📅 Año de Análisis:", anios)
+
+    # ── Filtro inline ──────────────────────────────────────────────────────
+    with st.container(border=True):
+        col_f, col_info = st.columns([1, 3])
+        with col_f:
+            anio = st.selectbox("📅 Año de análisis:", anios)
+        with col_info:
+            st.caption(f"Mostrando datos del año **{anio}**. Selecciona otro año para comparar.")
+
     df_f = df[df['anio'] == anio]
     df_prev = df[df['anio'] == anio - 1] if (anio - 1) in anios else pd.DataFrame()
 

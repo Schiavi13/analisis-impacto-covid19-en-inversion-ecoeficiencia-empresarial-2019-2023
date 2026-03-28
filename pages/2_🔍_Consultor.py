@@ -14,6 +14,7 @@ aplicar_tema()
 st.header("🔍 Consultor Experto Analítico")
 st.caption("Diagnóstico integral por año: hallazgos cualitativos + métricas reales.")
 
+
 CONOCIMIENTO = {
     2019: ("Pre-pandemia: baja priorización presupuestal para gestión ambiental.",
            "Incorporar indicadores de ecoeficiencia en los KPIs estratégicos."),
@@ -30,7 +31,16 @@ CONOCIMIENTO = {
 df = cargar_datos()
 if not df.empty:
     anios = sorted(df['anio'].unique())
-    anio = st.sidebar.selectbox("📅 Año:", anios, index=len(anios)-1)
+
+    # ── Filtro inline ──────────────────────────────────────────────────────
+    with st.container(border=True):
+        col_f, col_ctx = st.columns([1, 3])
+        with col_f:
+            anio = st.selectbox("📅 Año de consulta:", anios, index=len(anios)-1)
+        with col_ctx:
+            riesgo_prev, _ = CONOCIMIENTO.get(anio, ("—", "—"))
+            st.caption(f"📌 Contexto **{anio}:** {riesgo_prev}")
+
     df_a = df[df['anio']==anio]
     df_p = df[df['anio']==anio-1] if (anio-1) in anios else pd.DataFrame()
 

@@ -16,7 +16,16 @@ st.caption("Benchmarking macroeconómico frente al promedio nacional.")
 df = cargar_datos()
 if not df.empty:
     sectores = sorted(df['nombre_sector'].dropna().unique())
-    sector = st.sidebar.selectbox("🎯 Sector:", sectores)
+
+    # ── Filtro inline ──────────────────────────────────────────────────────
+    with st.container(border=True):
+        col_f, col_info = st.columns([2, 2])
+        with col_f:
+            sector = st.selectbox("🏭 Sector a analizar:", sectores)
+        with col_info:
+            n_emp_sect = df[df['nombre_sector']==sector]['id_empresa'].nunique()
+            st.metric("Empresas en el sector", f"{n_emp_sect:,}")
+
     df_sec = df[df['nombre_sector']==sector]
 
     st.divider()

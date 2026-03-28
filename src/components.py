@@ -37,43 +37,11 @@ def cargar_datos() -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# 2. TEMA VISUAL — solo CSS estático mínimo para sidebar
+# 2. TEMA VISUAL — estilo predeterminado de Streamlit
 # ---------------------------------------------------------------------------
 
-_SIDEBAR_CSS = """
-<style>
-#MainMenu, footer { visibility: hidden; }
-header[data-testid="stHeader"] { background: transparent !important; }
-section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%) !important;
-}
-section[data-testid="stSidebar"] * { color: #cbd5e1 !important; }
-section[data-testid="stSidebar"] .stSelectbox label,
-section[data-testid="stSidebar"] .stMultiSelect label {
-    color: #94a3b8 !important; font-size: 0.8rem;
-    text-transform: uppercase; letter-spacing: 0.05em;
-}
-section[data-testid="stSidebar"] hr { border-color: rgba(255,255,255,0.08) !important; }
-section[data-testid="stSidebar"] a[data-testid="stSidebarNavLink"] {
-    padding: 0.55rem 1rem !important; margin: 2px 8px;
-    border-radius: 8px !important; font-weight: 500 !important;
-    font-size: 0.9rem !important; color: #94a3b8 !important;
-    transition: background 0.15s ease, color 0.15s ease !important;
-}
-section[data-testid="stSidebar"] a[data-testid="stSidebarNavLink"]:hover {
-    background: rgba(59,130,246,0.15) !important; color: #e2e8f0 !important;
-}
-section[data-testid="stSidebar"] a[data-testid="stSidebarNavLink"][aria-current="page"] {
-    background: rgba(59,130,246,0.2) !important; color: #60a5fa !important;
-    font-weight: 700 !important; border-left: 3px solid #3b82f6 !important;
-}
-</style>
-"""
-
-
 def aplicar_tema() -> None:
-    """Inyecta CSS estático mínimo para sidebar y configura Plotly."""
-    st.markdown(_SIDEBAR_CSS, unsafe_allow_html=True)
+    """Configura el template de Plotly. Sin CSS personalizado."""
     pio.templates.default = "plotly"
 
 
