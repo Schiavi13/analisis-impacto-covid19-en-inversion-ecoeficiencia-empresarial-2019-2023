@@ -13,7 +13,7 @@ CREATE TABLE `sector_economico` (
   PRIMARY KEY (`id_sector`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- 4. Tabla: pinversionesinversionesingresosingresosempresa_opera_paisempresa_opera_paisempresaempresaempresa_opera_paisempresa_opera_paisais
+-- 4. Tabla: pais
 DROP TABLE IF EXISTS `pais`;
 CREATE TABLE `pais` (
   `id_pais` int NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ CREATE TABLE `inversiones` (
   CONSTRAINT `chk_realiza_inv_disp_desechos_bool` CHECK (((`realiza_inv_disp_desechos` is null) or (`realiza_inv_disp_desechos` = 1) or (`realiza_inv_disp_desechos` = 0))),
   CONSTRAINT `chk_realiza_inv_energia_limp_bool` CHECK (((`realiza_inv_energia_limp` is null) or (`realiza_inv_energia_limp` = 1) or (`realiza_inv_energia_limp` = 0))),
   CONSTRAINT `chk_realiza_inv_evita_ruido_vibra_bool` CHECK (((`realiza_inv_evita_ruido_vibra` is null) or (`realiza_inv_evita_ruido_vibra` = 1) or (`realiza_inv_evita_ruido_vibra` = 0))),
-  CONSTRAINT `chk_realiza_inv_inst_med_agua_bool` CHECK (((`realiza_inv_inst_med_agua` is null) or (`realiza_inv_inst_med_agua` = 1) or (`realiza_inv_inst_med_agua` = 0))),
+  CONSTRAINT `chk_realiza_inv_inst_med_agua_bool` CHECK (((`realiza_inv_inst_med_agua` is null) or (`realiza_inv_inst_med_agua` = 1) or (`realiza_inv_inst_med_agua) = 0))),
   CONSTRAINT `chk_realiza_inv_protec_suelo_bool` CHECK (((`realiza_inv_protec_suelo` is null) or (`realiza_inv_protec_suelo` = 1) or (`realiza_inv_protec_suelo` = 0))),
   CONSTRAINT `chk_realiza_inv_red_emision_aire_bool` CHECK (((`realiza_inv_red_emision_aire` is null) or (`realiza_inv_red_emision_aire` = 1) or (`realiza_inv_red_emision_aire` = 0))),
   CONSTRAINT `chk_realiza_otras_inv_amb_bool` CHECK (((`realiza_otras_inv_amb` is null) or (`realiza_otras_inv_amb` = 1) or (`realiza_otras_inv_amb` = 0)))
