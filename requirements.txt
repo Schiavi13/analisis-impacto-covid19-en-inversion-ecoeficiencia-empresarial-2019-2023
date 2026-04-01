@@ -1,3 +1,7 @@
-streamlit
-pandas
-plotly
+streamlit>=1.35,<2.0
+pandas>=2.0,<3.0
+plotly>=5.18,<6.0
+numpy>=1.24,<3.0
+sqlalchemy
+mysql-connector-python
+python-dotenv
