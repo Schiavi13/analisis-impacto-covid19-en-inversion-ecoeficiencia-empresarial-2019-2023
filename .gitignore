@@ -1,7 +1,3 @@
-# Archivos generados
-datos_unificados.csv
-dane.csv
-
 # Python
 __pycache__/
 *.py[cod]

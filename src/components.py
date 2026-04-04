@@ -1,5 +1,5 @@
 """
-Módulo centralizado de componentes para EcoAnalytics Pro.
+Módulo centralizado de componentes para Análisis de Impacto
 Solo funciones puras de datos + CSS mínimo para sidebar.
 NO usa unsafe_allow_html con contenido dinámico.
 """
@@ -17,13 +17,13 @@ import os
 def cargar_datos() -> pd.DataFrame:
     """Carga datos_unificados.csv con limpieza de tipos."""
     rutas = [
-        os.path.join(os.path.dirname(os.path.dirname(__file__)), 'datos_unificados.csv'),
-        'datos_unificados.csv',
-        os.path.join('..', 'datos_unificados.csv'),
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data/clean/datos_unificados.csv'),
+        'data/clean/datos_unificados.csv',
+        os.path.join('..', 'data/clean/datos_unificados.csv'),
     ]
     ruta = next((r for r in rutas if os.path.exists(r)), None)
     if ruta is None:
-        st.error("No se encontró **datos_unificados.csv**. Ejecute `python src/unificar_datos.py`.")
+        st.error("No se encontró **data/clean/datos_unificados.csv**. Ejecute `python src/unificar_datos.py`.")
         return pd.DataFrame()
 
     df = pd.read_csv(ruta, low_memory=False)

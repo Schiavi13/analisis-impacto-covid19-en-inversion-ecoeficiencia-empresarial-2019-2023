@@ -16,7 +16,7 @@ engine = create_engine(conexion_url)
 # ==========================================
 # 2. LEER EL ARCHIVO UNIFICADO
 # ==========================================
-ruta_archivo = 'datos_unificados.csv' # Asegúrate que esté en la misma carpeta que este script
+ruta_archivo = 'data/clean/datos_unificados.csv' # Asegúrate que esté en la misma carpeta que este script
 print(f"Leyendo el archivo {ruta_archivo}...")
 df_total = pd.read_csv(ruta_archivo)
 

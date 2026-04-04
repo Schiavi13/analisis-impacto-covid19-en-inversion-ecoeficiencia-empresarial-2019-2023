@@ -43,10 +43,10 @@ def conectar_mysql():
 
 def unificar_y_cargar_datos():
     """Lee CSVs de db/, mapea columnas según db.txt y exporta datos_unificados.csv."""
-    carpeta_db = "db"
-    print(f"🔄 Leyendo datos de la carpeta '{carpeta_db}'...")
+    carpeta_datos_unificados = "data/procesados/unificados"
+    print(f"🔄 Leyendo datos de la carpeta '{carpeta_datos_unificados}'...")
 
-    archivos_db = [f for f in os.listdir(carpeta_db) if f.endswith(".csv")]
+    archivos_db = [f for f in os.listdir(carpeta_datos_unificados) if f.endswith(".csv")]
     if not archivos_db:
         print("❌ No se encontraron archivos CSV en la carpeta 'db'.")
         return
@@ -54,7 +54,7 @@ def unificar_y_cargar_datos():
     # --- Carga ---
     dfs: list[pd.DataFrame] = []
     for archivo in archivos_db:
-        ruta = os.path.join(carpeta_db, archivo)
+        ruta = os.path.join(carpeta_datos_unificados, archivo)
         try:
             try:
                 df = pd.read_csv(ruta, encoding='utf-8', low_memory=False)
@@ -66,7 +66,6 @@ def unificar_y_cargar_datos():
             print(f"⚠️ Error leyendo {archivo}: {e}")
 
     df_raw = pd.concat(dfs, ignore_index=True)
-    df_raw.columns = [str(c).strip().replace('"', '').lower() for c in df_raw.columns]
 
     # --- Filtrar 2019-2023 ---
     if 'periodo' in df_raw.columns:
@@ -128,7 +127,7 @@ def unificar_y_cargar_datos():
             df_uni[col] = np.nan
 
     # --- Exportar ---
-    ruta_salida = "datos_unificados.csv"
+    ruta_salida = "data/clean/datos_unificados.csv"
     df_uni.to_csv(ruta_salida, index=False)
     print(f"✅ '{ruta_salida}' generado ({len(df_uni)} registros, años 2019-2023).")
 

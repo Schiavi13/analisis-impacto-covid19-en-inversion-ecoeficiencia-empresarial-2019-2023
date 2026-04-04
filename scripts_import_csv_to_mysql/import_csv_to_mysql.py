@@ -13,7 +13,7 @@ DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "proyecto")
 
-csv_path = "datos_unificados.csv"
+csv_path = "data/clean/datos_unificados.csv"
 
 def get_engine():
     connection_string = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
