@@ -1,10 +1,9 @@
 import streamlit as st
-from src.connection import get_connection
+from src.components import calcular_gasto_amb_total
 
 # Perform query.
-conn = get_connection()
-df = conn.query('SELECT * from sector_economico;', ttl=600)
+
+df = calcular_gasto_amb_total
 
 # Print results.
-for row in df.itertuples():
-    st.write(f"{row.id_sector}, {row.nombre_sector}:")
+st.write(f"{df}")
