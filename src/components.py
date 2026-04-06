@@ -36,7 +36,7 @@ def cargar_datos() -> pd.DataFrame:
     return df
 
 @st.cache_data
-def calcular_gasto_amb_total() -> float:
+def calcular_gasto_amb_total() -> pd.DataFrame:
 # Perform query.
     conn = get_connection()
     df = conn.query('SELECT SUM(gasto_gestion_amb) AS gasto_gestion_amb_total from gastos;', ttl=600)
