@@ -45,7 +45,7 @@ def calcular_gasto_amb_total() -> pd.DataFrame:
 @st.cache_data
 def cantidad_empresas() -> pd.DataFrame:
     conn = get_connection()
-    df = conn.query('SELECT COUNT(DISTINCT id_empresa) AS cantidad_empresas FROM empresas')
+    df = conn.query('SELECT COUNT(DISTINCT id_empresa) AS cantidad_empresas FROM empresa')
     return df
 # ---------------------------------------------------------------------------
 # 2. TEMA VISUAL — estilo predeterminado de Streamlit
