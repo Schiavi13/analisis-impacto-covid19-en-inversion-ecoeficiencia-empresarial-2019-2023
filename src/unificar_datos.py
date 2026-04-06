@@ -1,7 +1,7 @@
 """
 Script de unificación de datos.
-Lee todos los CSV de la carpeta `db/`, mapea columnas a la estructura de `db.txt`
-y genera `datos_unificados.csv` para consumo del dashboard Streamlit.
+Lee todos los CSV de la carpeta `data/procesados/unificados`, mapea columnas a la estructura de `db.txt`
+y genera `data/clean/datos_unificados.csv` para consumo del dashboard Streamlit.
 """
 import pandas as pd
 import numpy as np
