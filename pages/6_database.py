@@ -6,5 +6,5 @@ from src.components import calcular_gasto_amb_total
 df = calcular_gasto_amb_total()
 
 # Print results.
-for row in df.itertuples():
-    st.write(f"{row.gasto_gestion_amb_total}")
+st.write(f"${df['gasto_gestion_amb_total'].iloc[0] / 1e6:,.1f} M")
+    
