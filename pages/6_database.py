@@ -6,4 +6,4 @@ from src.components import calcular_gasto_amb_total
 df = calcular_gasto_amb_total
 
 # Print results.
-st.write(f"{df}")
+st.write(f"{df['gasto_gestion_amb_total']}")
