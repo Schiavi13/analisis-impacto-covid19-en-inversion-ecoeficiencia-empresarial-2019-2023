@@ -19,7 +19,7 @@ if not df.empty:
     # KPIs globales
     c1, c2, c3 = st.columns(3)
     c1.metric("💰 Gasto Gestión Ambiental Acumulado", f"${df2['gasto_gestion_amb_total'].iloc[0] / 1e6:,.1f} M")
-    c2.metric("🏢 Compañías Analizadas", f"{df['id_empresa'].nunique():,}")
+    c2.metric("🏢 Compañías Analizadas", f"{df2['cantidad_empresas'].iloc[0]:,}")
     c3.metric("📈 Ingreso Promedio", f"${df['total_ingresos'].mean() / 1e6:,.1f} M")
 
     st.divider()
