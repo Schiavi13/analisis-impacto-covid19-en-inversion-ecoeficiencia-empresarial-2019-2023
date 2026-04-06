@@ -4,7 +4,7 @@ Este directorio contiene el script `unir.py`, el cual tiene como objetivo princi
 
 ## 📝 Descripción del Script
 El script `unir.py` realiza las siguientes funciones:
-1.  **Lectura**: Carga el archivo maestro `datos_unificados.csv`.
+1.  **Lectura**: Carga el archivo maestro `data/clean/datos_unificados.csv`.
 2.  **Segmentación**: Divide las 39 columnas del CSV en 8 estructuras lógicas (DataFrames de Pandas).
 3.  **Normalización**: Elimina duplicados en tablas maestras (como Empresas y Sectores) para mantener la integridad.
 4.  **Carga Secuencial**: Inserta los datos en MySQL siguiendo un orden estricto para satisfacer las llaves foráneas:
@@ -14,7 +14,7 @@ El script `unir.py` realiza las siguientes funciones:
 
 ## ⚠️ Consideraciones de Uso
 *   **Credenciales**: A diferencia de la versión en la carpeta `scripts/`, este archivo tiene las credenciales de base de datos escritas directamente en el código (líneas 7-10). **Debes actualizarlas** antes de ejecutarlo.
-*   **Driver**: Utiliza `pymysql`. Asegúrate de tenerlo instalado.
+*   **Driver**: Utiliza `pymysql`.
 
 ## 🛠️ Instalación de Dependencias
 Para usar este script específicamente, instala las librerías necesarias:
