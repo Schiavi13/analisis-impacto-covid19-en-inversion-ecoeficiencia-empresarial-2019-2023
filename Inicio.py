@@ -3,7 +3,7 @@ import streamlit as st
 import sys, os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
-from components import cargar_datos, aplicar_tema, calcular_gasto_amb_total, cantidad_empresas
+from components import cargar_datos, aplicar_tema, calcular_gasto_amb_total
 from analytics import resumen_ejecutivo
 
 st.set_page_config(page_title="EcoAnalytics Pro", page_icon="⚡", layout="wide",
@@ -15,12 +15,12 @@ st.divider()
 
 df = cargar_datos()
 df2 = calcular_gasto_amb_total()
-df3 = cantidad_empresas()
+#df3 = cantidad_empresas()
 if not df.empty:
     # KPIs globales
     c1, c2, c3 = st.columns(3)
     c1.metric("💰 Gasto Gestión Ambiental Acumulado", f"${df2['gasto_gestion_amb_total'].iloc[0] / 1e6:,.1f} M")
-    c2.metric("🏢 Compañías Analizadas", f"{df3['cantidad_empresas'].iloc[0]:,}")
+    c2.metric("🏢 Compañías Analizadas", f"{df['id_empresa'].nunique():,}")
     c3.metric("📈 Ingreso Promedio", f"${df['total_ingresos'].mean() / 1e6:,.1f} M")
 
     st.divider()
