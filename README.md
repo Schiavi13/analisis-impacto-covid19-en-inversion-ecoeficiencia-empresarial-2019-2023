@@ -69,7 +69,7 @@ streamlit run Inicio.py
 │   ├── 2022_eas_unificado.csv
 │   ├── 2023_eas_unificado.csv
 │   └── README.md
-├── docs/
+├── proyecto/
 │   ├── diagramas/
 │   │   ├── diagrama_modelo_entidad_relacion.png
 │   │   └── diagrama_modelo_relacional.png
