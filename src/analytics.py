@@ -171,7 +171,7 @@ def generar_autodiagnostico(df: pd.DataFrame) -> dict:
 
     # Alerta si ratio cayó
     if 'tendencia_ecologia' in resultado and 'disminuyó' in resultado['tendencia_ecologia']:
-        resultado['alerta'] = "⚠️ La inversión ambiental proporcional al ingreso ha caído — señal de presión financiera."
+        resultado['alerta'] = "⚠️ La inversión ambiental proporcional al ingreso ha caído."
     else:
         resultado['alerta'] = "✅ La inversión ambiental proporcional muestra tendencia estable o positiva."
 
