@@ -34,10 +34,9 @@ if not df.empty:
     gn = df['gastos_totales'].sum()
     share = (gs/gn*100) if gn > 0 else 0
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2 = st.columns(2)
     c1.metric("🏭 Empresas", f"{n:,}")
     c2.metric("💵 Gasto Sectorial", f"${gs/1e6:,.1f}M")
-    c3.metric("📊 Share Nacional", f"{share:.2f}%")
 
     tab2, tab3 = st.tabs(["📊 Benchmarking",""])
 
