@@ -52,7 +52,7 @@ if not df.empty:
         "- 🌳 **Diagnóstico** — Métricas macro por año y treemap sectorial\n"
         "- 🦠 **COVID-19** — Curva histórica de inversión ambiental\n"
         "- 🏢 **Empresarial** — Perfil individual por ID de empresa\n"
-        "- 🏭 **Sectorial** — Boxplots y benchmarking por sector\n"
-        "- 🧬 **Data Science** — Correlaciones, distribuciones, ecoeficiencia y CAGR\n\n"
+        "- 🏭 **Sectorial** — Benchmarking por sector\n"
+        "- 🧬 **Data Science** — Correlaciones y CAGR\n\n"
         "👈 *Utiliza el menú lateral para navegar.*"
     )
