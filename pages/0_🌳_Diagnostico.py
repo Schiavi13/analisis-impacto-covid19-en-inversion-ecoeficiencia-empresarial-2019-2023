@@ -65,7 +65,7 @@ if not df.empty:
             fig_pie = px.pie(df_pie, values='gastos_totales', names='nombre_sector', hole=0.4,
                              color_discrete_sequence=px.colors.sequential.Tealgrn)
             fig_pie.update_traces(textinfo='percent+label', textposition='outside', customdata=df["gastos_totales"] / 1_000_000,
-                                  hovertemplate="gastos totales: %{customdata:.2f}B<extra></extra>")
+                                  hovertemplate="<extra></extra>")
             fig_pie.update_layout(height=420, showlegend=False, margin=dict(t=20, b=20))
             st.plotly_chart(fig_pie, use_container_width=True)
         with col_t:
