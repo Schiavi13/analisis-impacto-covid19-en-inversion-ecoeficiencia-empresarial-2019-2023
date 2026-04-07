@@ -53,7 +53,7 @@ if not df.empty:
             fig = px.treemap(df_top, path=['nombre_sector'], values='gastos_totales', color='gastos_totales', 
                              color_continuous_scale='Tealgrn')
             fig.update_traces(customdata=df["gastos_totales"] / 1_000_000,  # millions 
-                              hovertemplate="labels=%{label}<br>total_bill=%{customdata:.2f}M<extra></extra>")
+                              hovertemplate="sector: %{label}<br>gastos totales: %{customdata:.2f}M<extra></extra>")
             fig.update_layout(height=480, margin=dict(t=20, l=10, r=10, b=10))
             st.plotly_chart(fig, use_container_width=True)
 
