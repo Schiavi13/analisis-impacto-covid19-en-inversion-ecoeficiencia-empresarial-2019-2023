@@ -52,8 +52,9 @@ if not df.empty:
         df_top = df_f.groupby('nombre_sector')['gastos_totales'].sum().reset_index().nlargest(10, 'gastos_totales')
         if not df_top.empty and df_top['gastos_totales'].sum() > 0:
             fig = px.treemap(df_top, path=['nombre_sector'], values='gastos_totales', color='gastos_totales', 
-                             color_continuous_scale='Tealgrn', hover_data={'gastos_totales': True})
-            fig.update_traces(hovertemplate="sector: %{label}<br>gastos totales: %{gastos_totales:.2f}B<extra></extra>")
+                             color_continuous_scale='Tealgrn')
+            fig.update_traces(customdata=df["gastos_totales"] / 1_000_000,  # millions 
+                              hovertemplate="<extra></extra>")
             fig.update_layout(height=480, margin=dict(t=20, l=10, r=10, b=10))
             st.plotly_chart(fig, use_container_width=True)
 
