@@ -34,25 +34,17 @@ if not df.empty:
     gn = df['gastos_totales'].sum()
     share = (gs/gn*100) if gn > 0 else 0
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2 = st.columns(2)
     c1.metric("🏭 Empresas", f"{n:,}")
     c2.metric("💵 Gasto Sectorial", f"${gs/1e6:,.1f}M")
-    c3.metric("📊 Share Nacional", f"{share:.2f}%")
 
-    tab1, tab2 = st.tabs(["📉 Boxplot Anual", "📊 Benchmarking"])
-
-    with tab1:
-        db = df_sec[df_sec['gastos_totales'] > 0]
-        fig = px.box(db, x='anio', y='gastos_totales', points='outliers', color='anio',
-                     labels={'gastos_totales':'Gasto Total ($)','anio':'Año'})
-        fig.update_layout(xaxis=dict(tickmode='linear', dtick=1), showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+    tab2, tab3 = st.tabs(["📊 Benchmarking",""])
 
     with tab2:
         av_s = df_sec.groupby('anio')['gastos_totales'].mean().reset_index()
-        av_s['Tipo'] = f'Sector: {sector.title()}'
+        av_s['Tipo'] = f' {sector.title()}'
         av_n = df.groupby('anio')['gastos_totales'].mean().reset_index()
-        av_n['Tipo'] = 'Promedio Nacional'
+        av_n['Tipo'] = ' Promedio Nacional'
         db2 = pd.concat([av_s, av_n])
         fig2 = px.line(db2, x='anio', y='gastos_totales', color='Tipo', markers=True,
                        labels={'gastos_totales':'Gasto Promedio ($)','anio':'Año'},

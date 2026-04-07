@@ -84,9 +84,9 @@ if modo_id:
         )
     with col_badge:
         ratio_eco = df_emp["ratio_eco_ingreso"].mean()
-        if ratio_eco >= 1:
+        if ratio_eco >= 0.027:
             st.success(f"🌿 Ratio eco\n**{ratio_eco:.2f}%**")
-        elif ratio_eco >= 0.1:
+        elif ratio_eco >= 0.013:
             st.info(f"🌱 Ratio eco\n**{ratio_eco:.2f}%**")
         else:
             st.warning(f"⚠️ Ratio eco\n**{ratio_eco:.3f}%**")
@@ -108,8 +108,8 @@ if modo_id:
     st.divider()
 
     # ── Pestañas analíticas ───────────────────────────────────────────────────
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["📊 Evolución Financiera", "🌿 Perfil Ambiental", "📈 Ecoeficiencia", "🗄️ Datos Completos"])
+    tab1, tab2, tab4 = st.tabs(
+        ["📊 Evolución Financiera", "🌿 Perfil Ambiental", "🗄️ Datos Completos"])
 
     with tab1:
         col_g1, col_g2 = st.columns(2)
@@ -127,7 +127,6 @@ if modo_id:
                            title="📉 Intensidad del Gasto (Gastos/Ingresos %)",
                            labels={"intensidad_gasto":"Intensidad (%)","anio":"Año"},
                            markers=True, color_discrete_sequence=["#f59e0b"])
-            fig2.add_hline(y=100, line_dash="dash", line_color="red", annotation_text="Punto de equilibrio")
             fig2.update_layout(xaxis=dict(tickmode="linear", dtick=1))
             st.plotly_chart(fig2, use_container_width=True)
 
@@ -164,33 +163,6 @@ if modo_id:
             inactivas = [k for k, v in inv_cols_presentes.items() if df_emp[v].sum() == 0]
             if activas:   st.success(f"✅ **Invirtió en:** {', '.join(activas)}")
             if inactivas: st.error(f"❌ **Sin inversión en:** {', '.join(inactivas)}")
-
-    with tab3:
-        col_e1, col_e2 = st.columns(2)
-        with col_e1:
-            fig5 = px.line(df_emp, x="anio", y="ratio_eco_ingreso",
-                           title="📊 Ratio Eco-eficiencia vs Mediana Sectorial",
-                           labels={"ratio_eco_ingreso":"Ratio (%)","anio":"Año"},
-                           markers=True, color_discrete_sequence=["#8b5cf6"])
-            bench = df_all[df_all["nombre_sector"] == sector].groupby("anio")["ratio_eco_ingreso"].median()
-            fig5.add_scatter(x=bench.index, y=bench.values, mode="lines",
-                             name=f"Mediana {sector.title()}", line=dict(dash="dash", color="#f97316"))
-            fig5.update_layout(xaxis=dict(tickmode="linear", dtick=1))
-            st.plotly_chart(fig5, use_container_width=True)
-        with col_e2:
-            fig6 = px.bar(df_emp, x="anio", y="eco_per_capita",
-                          title="👤 Inversión Ambiental por Empleado ($)",
-                          labels={"eco_per_capita":"$ por empleado","anio":"Año"},
-                          color_discrete_sequence=["#06b6d4"])
-            fig6.update_layout(xaxis=dict(tickmode="linear", dtick=1))
-            st.plotly_chart(fig6, use_container_width=True)
-        st.markdown("#### 📋 Indicadores por año")
-        df_eco_tabla = df_emp[["anio","ratio_eco_ingreso","eco_per_capita","intensidad_gasto"]].copy()
-        df_eco_tabla.columns = ["Año","Ratio eco/ingreso (%)","Eco por empleado ($)","Intensidad gasto (%)"]
-        st.dataframe(df_eco_tabla.style.format({"Ratio eco/ingreso (%)":"{:.4f}",
-                                                 "Eco por empleado ($)":"{:,.0f}",
-                                                 "Intensidad gasto (%)":"{:.1f}"}),
-                     use_container_width=True, hide_index=True)
 
     with tab4:
         cols_export = [c for c in ["anio","total_ingresos","gastos_totales","gasto_gestion_amb",
@@ -289,10 +261,9 @@ else:
     st.divider()
 
     # ── Pestañas ──────────────────────────────────────────────────────────────
-    tab_a, tab_b, tab_c, tab_d = st.tabs([
+    tab_a, tab_b, tab_d = st.tabs([
         "📊 Distribución Financiera",
         "🌿 Inversión Ambiental",
-        "📈 Ecoeficiencia Comparativa",
         "🗄️ Listado de Empresas",
     ])
 
@@ -308,25 +279,6 @@ else:
                          color_discrete_sequence=["#3b82f6","#ef4444"])
             fig.update_layout(xaxis=dict(tickmode="linear", dtick=1))
             st.plotly_chart(fig, use_container_width=True)
-        with col_a2:
-            if "nombre_sector" in df_vista.columns:
-                agg_s = df_vista.groupby("nombre_sector")["total_ingresos"].sum().reset_index()
-                agg_s.columns = ["Sector","Ingresos"]
-                agg_s["Sector"] = agg_s["Sector"].str.title()
-                fig2 = px.pie(agg_s, names="Sector", values="Ingresos",
-                              title="🏭 Participación de Ingresos por Sector",
-                              color_discrete_sequence=px.colors.qualitative.Set3)
-                st.plotly_chart(fig2, use_container_width=True)
-        if "tamanio_empresa" in df_vista.columns:
-            orden_tam = ["Microempresa","Pequeña","Mediana","Grande"]
-            fig3 = px.box(df_vista[df_vista["tamanio_empresa"].isin(orden_tam)],
-                          x="tamanio_empresa", y="total_ingresos",
-                          category_orders={"tamanio_empresa": orden_tam},
-                          title="📏 Distribución de Ingresos por Tamaño",
-                          labels={"total_ingresos":"Ingresos ($)","tamanio_empresa":"Tamaño"},
-                          color="tamanio_empresa",
-                          color_discrete_sequence=["#6366f1","#3b82f6","#10b981","#f59e0b"])
-            st.plotly_chart(fig3, use_container_width=True)
 
     with tab_b:
         col_b1, col_b2 = st.columns(2)
@@ -356,36 +308,6 @@ else:
                               title="🌿 Empresas que invierten por área ambiental",
                               color_discrete_sequence=["#10b981"])
                 st.plotly_chart(fig5, use_container_width=True)
-
-    with tab_c:
-        col_c1, col_c2 = st.columns(2)
-        with col_c1:
-            agg_eco = df_vista.groupby("anio")["ratio_eco_ingreso"].median().reset_index()
-            fig6 = px.line(agg_eco, x="anio", y="ratio_eco_ingreso", markers=True,
-                           title="📊 Ratio Eco-eficiencia mediano por Año",
-                           labels={"ratio_eco_ingreso":"Ratio (%)","anio":"Año"},
-                           color_discrete_sequence=["#8b5cf6"])
-            fig6.update_layout(xaxis=dict(tickmode="linear", dtick=1))
-            st.plotly_chart(fig6, use_container_width=True)
-        with col_c2:
-            if "nombre_sector" in df_vista.columns:
-                agg_se = df_vista.groupby("nombre_sector")["ratio_eco_ingreso"].median().reset_index()
-                agg_se.columns = ["Sector","Ratio eco (%)"]
-                agg_se["Sector"] = agg_se["Sector"].str.title()
-                agg_se = agg_se.sort_values("Ratio eco (%)", ascending=True)
-                fig7 = px.bar(agg_se, y="Sector", x="Ratio eco (%)", orientation="h",
-                              title="🏭 Ratio Eco-eficiencia por Sector",
-                              color="Ratio eco (%)", color_continuous_scale="Greens")
-                st.plotly_chart(fig7, use_container_width=True)
-        fig8 = px.scatter(
-            df_vista.sample(min(2000, len(df_vista)), random_state=42),
-            x="total_ingresos", y="gasto_gestion_amb",
-            color="nombre_sector" if "nombre_sector" in df_vista.columns else None,
-            size="personal_ocupado_total", hover_data=["id_empresa","anio"],
-            title="🔵 Ingreso vs Inversión Ambiental (muestra representativa)",
-            labels={"total_ingresos":"Ingresos ($)","gasto_gestion_amb":"Gasto ambiental ($)",
-                    "nombre_sector":"Sector"}, opacity=0.7)
-        st.plotly_chart(fig8, use_container_width=True)
 
     with tab_d:
         resumen_emp = (

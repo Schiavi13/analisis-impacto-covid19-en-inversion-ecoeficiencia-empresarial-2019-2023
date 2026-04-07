@@ -7,7 +7,7 @@ import streamlit as st
 import pandas as pd
 import plotly.io as pio
 import os
-
+from src.connection import get_connection
 
 # ---------------------------------------------------------------------------
 # 1. CARGA DE DATOS (cacheada)
@@ -35,7 +35,18 @@ def cargar_datos() -> pd.DataFrame:
             df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
     return df
 
+@st.cache_data
+def calcular_gasto_amb_total() -> pd.DataFrame:
+# Perform query.
+    conn = get_connection()
+    df = conn.query('SELECT SUM(gasto_gestion_amb) AS gasto_gestion_amb_total from gastos;', ttl=600)
+    return df
 
+@st.cache_data
+def cantidad_empresas() -> pd.DataFrame:
+    conn = get_connection()
+    df = conn.query('SELECT COUNT(DISTINCT id_empresa) AS cantidad_empresas FROM empresa')
+    return df
 # ---------------------------------------------------------------------------
 # 2. TEMA VISUAL — estilo predeterminado de Streamlit
 # ---------------------------------------------------------------------------

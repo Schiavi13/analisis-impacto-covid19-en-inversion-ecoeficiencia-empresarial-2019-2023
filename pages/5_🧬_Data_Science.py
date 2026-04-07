@@ -30,9 +30,8 @@ if not df_raw.empty:
     COLS_NUM = ['total_ingresos', 'gastos_totales', 'gasto_gestion_amb', 'personal_ocupado_total']
     NOMS = ['Ingresos', 'Gastos Totales', 'Gasto Amb.', 'Personal']
 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "🔥 Correlación", "📉 Distribuciones", "🌱 Ecoeficiencia",
-        "📈 CAGR Sectorial", "📊 Estadísticas",
+    tab1, tab4, tab5 = st.tabs([
+        "🔥 Correlación", "📈 CAGR Sectorial", "📊 Estadísticas",
     ])
 
     # ── TAB 1: Heatmap de correlación ────────────────────────────────────
@@ -62,90 +61,6 @@ if not df_raw.empty:
                 st.warning(diag['alerta'])
             else:
                 st.success(diag['alerta'])
-
-    # ── TAB 2: Distribuciones ────────────────────────────────────────────
-    with tab2:
-        st.markdown("**Distribución y outliers** por variable y año.")
-        col_sel = st.selectbox("Variable:", COLS_NUM,
-                               format_func=lambda c: dict(zip(COLS_NUM, NOMS))[c])
-        anios = sorted(df['anio'].unique(), reverse=True)
-        anio_d = st.selectbox("Año:", anios, key='dist_anio')
-        da = df[(df['anio'] == anio_d) & (df[col_sel] > 0)]
-
-        c1, c2 = st.columns(2)
-        with c1:
-            fig_hist = px.histogram(da, x=col_sel, nbins=40, color='tamanio_empresa',
-                                    color_discrete_sequence=px.colors.qualitative.Set2,
-                                    labels={col_sel: dict(zip(COLS_NUM, NOMS))[col_sel]},
-                                    title=f'Histograma — {anio_d}',
-                                    barmode='overlay', opacity=0.7)
-            fig_hist.update_layout(showlegend=True, legend_title='Tamaño')
-            st.plotly_chart(fig_hist, use_container_width=True)
-
-        with c2:
-            fig_box = px.box(da, x='tamanio_empresa', y=col_sel, color='tamanio_empresa',
-                             color_discrete_sequence=px.colors.qualitative.Set2,
-                             labels={col_sel: dict(zip(COLS_NUM, NOMS))[col_sel],
-                                     'tamanio_empresa': 'Tamaño'},
-                             title=f'Boxplot por Tamaño — {anio_d}',
-                             category_orders={'tamanio_empresa': ['Microempresa', 'Pequeña', 'Mediana', 'Grande']})
-            fig_box.update_layout(showlegend=False)
-            st.plotly_chart(fig_box, use_container_width=True)
-
-        st.info(
-            f"**Mediana:** ${da[col_sel].median()/1e6:,.2f}M  |  "
-            f"**P75:** ${da[col_sel].quantile(0.75)/1e6:,.2f}M  |  "
-            f"**P95:** ${da[col_sel].quantile(0.95)/1e6:,.2f}M  |  "
-            f"**Outliers (>P95):** {(da[col_sel] > da[col_sel].quantile(0.95)).sum()} empresas"
-        )
-
-    # ── TAB 3: Ecoeficiencia ─────────────────────────────────────────────
-    with tab3:
-        st.markdown("**Indicadores de ecoeficiencia** calculados a partir de los datos reales.")
-
-        kpi1, kpi2, kpi3 = st.columns(3)
-        anio_rec = df['anio'].max()
-        df_rec = df[df['anio'] == anio_rec]
-        kpi1.metric("Ratio Eco/Ingreso (mediana)", f"{df_rec['ratio_eco_ingreso'].median():.3f}%")
-        kpi2.metric("Eco per-cápita (mediana)", f"${df_rec['eco_per_capita'].median():,.0f}")
-        kpi3.metric("Intensidad Gasto (mediana)", f"{df_rec['intensidad_gasto'].median():.1f}%")
-
-        st.divider()
-        # Evolución temporal de los 3 indicadores
-        eco_anual = df.groupby('anio').agg(
-            ratio_eco=('ratio_eco_ingreso', 'median'),
-            eco_cap=('eco_per_capita', 'median'),
-            intensidad=('intensidad_gasto', 'median'),
-        ).reset_index()
-
-        fig_eco = go.Figure()
-        fig_eco.add_trace(go.Scatter(x=eco_anual['anio'], y=eco_anual['ratio_eco'],
-                                      name='Eco/Ingreso (%)', mode='lines+markers',
-                                      line=dict(color='#10b981', width=3)))
-        fig_eco.add_vrect(x0=2019.5, x1=2020.5, fillcolor='rgba(239,68,68,0.08)', line_width=0,
-                          annotation_text='COVID', annotation_position='top left')
-        fig_eco.update_layout(xaxis=dict(tickmode='linear', dtick=1, title='Año'),
-                              yaxis_title='Ratio Mediano (%)', title='Evolución del Ratio Eco/Ingreso',
-                              legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
-                              height=380)
-        st.plotly_chart(fig_eco, use_container_width=True)
-
-        st.markdown("**Ecoeficiencia por tamaño de empresa:**")
-        eco_tam = df.groupby(['tamanio_empresa', 'anio']).agg(
-            ratio=('ratio_eco_ingreso', 'median')
-        ).reset_index()
-        cat_order = {'tamanio_empresa': ['Microempresa', 'Pequeña', 'Mediana', 'Grande']}
-        fig_tam = px.line(eco_tam, x='anio', y='ratio', color='tamanio_empresa', markers=True,
-                          labels={'ratio': 'Ratio Eco/Ingreso (%)', 'anio': 'Año',
-                                  'tamanio_empresa': 'Tamaño'},
-                          color_discrete_sequence=px.colors.qualitative.Set2,
-                          category_orders=cat_order)
-        fig_tam.update_layout(xaxis=dict(tickmode='linear', dtick=1),
-                              legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
-                              height=350)
-        st.plotly_chart(fig_tam, use_container_width=True)
-        st.info("**Lectura:** Las empresas **Grandes** tienden a tener mayor ratio eco/ingreso. "
-                "Una caída en 2020 refleja el impacto COVID en las inversiones ambientales.")
 
     # ── TAB 4: CAGR sectorial ────────────────────────────────────────────
     with tab4:

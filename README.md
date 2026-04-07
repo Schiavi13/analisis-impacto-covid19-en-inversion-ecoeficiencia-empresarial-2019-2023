@@ -1,6 +1,13 @@
-# 📊 EcoAnalytics Pro — Dashboard de Ecoeficiencia Empresarial
+# 📊 EcoAnalytics Pro - Dashboard de Ecoeficiencia Empresarial
 
 Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambiental empresarial colombiana (2019-2023), utilizando datos del **DANE** (Encuesta Ambiental Industrial).
+
+# Colaboradores
+- Melissa González López  
+- Luis Fernando Martínez  
+- Erika Osorio Foronda 
+- Wilder Salas  
+- Bernardo Saldarriaga 
 
 ## 🚀 Inicio Rápido
 
@@ -69,7 +76,7 @@ streamlit run Inicio.py
 │   ├── 2022_eas_unificado.csv
 │   ├── 2023_eas_unificado.csv
 │   └── README.md
-├── docs/
+├── proyecto/
 │   ├── diagramas/
 │   │   ├── diagrama_modelo_entidad_relacion.png
 │   │   └── diagrama_modelo_relacional.png
@@ -98,7 +105,6 @@ streamlit run Inicio.py
 ├── pages/
 │   ├── 0_🌳_Diagnostico.py
 │   ├── 1_🦠_COVID-19.py
-│   ├── 2_🔍_Consultor.py
 │   ├── 3_🏢_Empresarial.py
 │   ├── 4_🏭_Sectorial.py
 │   └── 5_🧬_Data_Science.py
@@ -161,7 +167,7 @@ streamlit run Inicio.py
 
 > **Rol:** Actúa como Data Scientist Senior y Frontend Engineer experto en Streamlit.
 >
-> **Contexto:** Dashboard analítico multi-página (Streamlit) alimentado por `data/clean/datos_unificados.csv` (>30K registros, 2019-2023, DANE Colombia). Arquitectura: `src/components.py` (datos + CSS), `pages/` (6 módulos), `.streamlit/config.toml` (tema).
+> **Contexto:** Dashboard analítico multi-página (Streamlit) alimentado por `data/clean/datos_unificados.csv` (>30K registros, 2019-2023, DANE Colombia). Arquitectura: `src/components.py` (datos + CSS), `pages/` (5 módulos), `.streamlit/config.toml` (tema).
 >
 > **Objetivo:** [DESCRIBIR MEJORA ESPECÍFICA]
 >

@@ -1,6 +1,7 @@
 """Página 0 — Diagnóstico Ambiental General."""
 import streamlit as st
 import pandas as pd
+import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import sys, os
@@ -50,8 +51,10 @@ if not df.empty:
     with tab1:
         df_top = df_f.groupby('nombre_sector')['gastos_totales'].sum().reset_index().nlargest(10, 'gastos_totales')
         if not df_top.empty and df_top['gastos_totales'].sum() > 0:
-            fig = px.treemap(df_top, path=['nombre_sector'], values='gastos_totales',
-                             color='gastos_totales', color_continuous_scale='Tealgrn')
+            fig = px.treemap(df_top, path=['nombre_sector'], values='gastos_totales', color='gastos_totales', 
+                             color_continuous_scale='Tealgrn')
+            fig.update_traces(customdata=df["gastos_totales"] / 1_000_000,  # millions 
+                              hovertemplate="sector: %{label}<br>gastos totales: %{customdata:.2f}B<extra></extra>")
             fig.update_layout(height=480, margin=dict(t=20, l=10, r=10, b=10))
             st.plotly_chart(fig, use_container_width=True)
 
@@ -61,7 +64,8 @@ if not df.empty:
             df_pie = df_f.groupby('nombre_sector')['gastos_totales'].sum().reset_index().nlargest(8, 'gastos_totales')
             fig_pie = px.pie(df_pie, values='gastos_totales', names='nombre_sector', hole=0.4,
                              color_discrete_sequence=px.colors.sequential.Tealgrn)
-            fig_pie.update_traces(textinfo='percent+label', textposition='outside')
+            fig_pie.update_traces(textinfo='percent+label', textposition='outside', customdata=df["gastos_totales"] / 1_000_000,
+                                  hovertemplate="gastos totales: %{customdata:.2f}B<extra></extra>")
             fig_pie.update_layout(height=420, showlegend=False, margin=dict(t=20, b=20))
             st.plotly_chart(fig_pie, use_container_width=True)
         with col_t:
@@ -85,6 +89,7 @@ if not df.empty:
                                    mode='lines+markers', line=dict(color='#ef4444', width=3)))
         fig_l.add_trace(go.Scatter(x=dh['anio'], y=dh['a'], name='Gasto Ambiental',
                                    mode='lines+markers', line=dict(color='#10b981', width=3, dash='dot')))
+        fig.update_yaxes(type="log")
         fig_l.add_vrect(x0=anio-0.3, x1=anio+0.3, fillcolor='rgba(59,130,246,0.08)', line_width=0)
         fig_l.update_layout(xaxis=dict(tickmode='linear', dtick=1, title='Año'), yaxis_title='Monto ($)',
                             legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1), height=420)
