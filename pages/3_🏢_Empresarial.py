@@ -84,9 +84,9 @@ if modo_id:
         )
     with col_badge:
         ratio_eco = df_emp["ratio_eco_ingreso"].mean()
-        if ratio_eco >= 1:
+        if ratio_eco >= 0.027:
             st.success(f"🌿 Ratio eco\n**{ratio_eco:.2f}%**")
-        elif ratio_eco >= 0.1:
+        elif ratio_eco >= 0.013:
             st.info(f"🌱 Ratio eco\n**{ratio_eco:.2f}%**")
         else:
             st.warning(f"⚠️ Ratio eco\n**{ratio_eco:.3f}%**")
@@ -127,7 +127,6 @@ if modo_id:
                            title="📉 Intensidad del Gasto (Gastos/Ingresos %)",
                            labels={"intensidad_gasto":"Intensidad (%)","anio":"Año"},
                            markers=True, color_discrete_sequence=["#f59e0b"])
-            fig2.add_hline(y=100, line_dash="dash", line_color="red", annotation_text="Punto de equilibrio")
             fig2.update_layout(xaxis=dict(tickmode="linear", dtick=1))
             st.plotly_chart(fig2, use_container_width=True)
 
