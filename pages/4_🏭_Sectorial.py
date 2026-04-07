@@ -39,7 +39,7 @@ if not df.empty:
     c2.metric("💵 Gasto Sectorial", f"${gs/1e6:,.1f}M")
     c3.metric("📊 Share Nacional", f"{share:.2f}%")
 
-    tab2, = st.tabs("📊 Benchmarking")
+    tab2, tab3 = st.tabs(["📊 Benchmarking",""])
 
     with tab2:
         av_s = df_sec.groupby('anio')['gastos_totales'].mean().reset_index()
