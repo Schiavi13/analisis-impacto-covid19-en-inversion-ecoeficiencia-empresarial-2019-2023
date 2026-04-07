@@ -1,4 +1,4 @@
-# 📊 EcoAnalytics Pro — Dashboard de Ecoeficiencia Empresarial
+# 📊 EcoAnalytics Pro - Dashboard de Ecoeficiencia Empresarial
 
 Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambiental empresarial colombiana (2019-2023), utilizando datos del **DANE** (Encuesta Ambiental Industrial).
 
