@@ -34,12 +34,10 @@ if not df.empty:
         with col_r1:
             top3 = resumen.get('top3_sectores', [])
             cambio_amb = resumen.get('cambio_ambiental_pct', 0)
-            ratio_eco = resumen.get('ratio_ambiental_mediano', 0)
 
             st.markdown(
                 f"- 🏆 **Top 3 sectores por gasto**: {', '.join(s.title() for s in top3)}\n"
-                f"- 🌱 **Gasto ambiental vs año anterior**: **{cambio_amb:+.1f}%**\n"
-                f"- 📊 **Ratio eco/ingreso mediano:** {ratio_eco:.3f}% del ingreso total"
+                f"- 🌱 **Gasto ambiental vs año anterior**: **{cambio_amb:+.1f}%**"
             )
 
         with col_r2:
