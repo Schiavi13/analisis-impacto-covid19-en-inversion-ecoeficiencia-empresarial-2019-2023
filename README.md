@@ -98,7 +98,6 @@ streamlit run Inicio.py
 ├── pages/
 │   ├── 0_🌳_Diagnostico.py
 │   ├── 1_🦠_COVID-19.py
-│   ├── 2_🔍_Consultor.py
 │   ├── 3_🏢_Empresarial.py
 │   ├── 4_🏭_Sectorial.py
 │   └── 5_🧬_Data_Science.py
@@ -161,7 +160,7 @@ streamlit run Inicio.py
 
 > **Rol:** Actúa como Data Scientist Senior y Frontend Engineer experto en Streamlit.
 >
-> **Contexto:** Dashboard analítico multi-página (Streamlit) alimentado por `data/clean/datos_unificados.csv` (>30K registros, 2019-2023, DANE Colombia). Arquitectura: `src/components.py` (datos + CSS), `pages/` (6 módulos), `.streamlit/config.toml` (tema).
+> **Contexto:** Dashboard analítico multi-página (Streamlit) alimentado por `data/clean/datos_unificados.csv` (>30K registros, 2019-2023, DANE Colombia). Arquitectura: `src/components.py` (datos + CSS), `pages/` (5 módulos), `.streamlit/config.toml` (tema).
 >
 > **Objetivo:** [DESCRIBIR MEJORA ESPECÍFICA]
 >
