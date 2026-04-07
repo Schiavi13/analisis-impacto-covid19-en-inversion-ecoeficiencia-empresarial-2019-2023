@@ -307,25 +307,6 @@ else:
                          color_discrete_sequence=["#3b82f6","#ef4444"])
             fig.update_layout(xaxis=dict(tickmode="linear", dtick=1))
             st.plotly_chart(fig, use_container_width=True)
-        with col_a2:
-            if "nombre_sector" in df_vista.columns:
-                agg_s = df_vista.groupby("nombre_sector")["total_ingresos"].sum().reset_index()
-                agg_s.columns = ["Sector","Ingresos"]
-                agg_s["Sector"] = agg_s["Sector"].str.title()
-                fig2 = px.pie(agg_s, names="Sector", values="Ingresos",
-                              title="🏭 Participación de Ingresos por Sector",
-                              color_discrete_sequence=px.colors.qualitative.Set3)
-                st.plotly_chart(fig2, use_container_width=True)
-        if "tamanio_empresa" in df_vista.columns:
-            orden_tam = ["Microempresa","Pequeña","Mediana","Grande"]
-            fig3 = px.box(df_vista[df_vista["tamanio_empresa"].isin(orden_tam)],
-                          x="tamanio_empresa", y="total_ingresos",
-                          category_orders={"tamanio_empresa": orden_tam},
-                          title="📏 Distribución de Ingresos por Tamaño",
-                          labels={"total_ingresos":"Ingresos ($)","tamanio_empresa":"Tamaño"},
-                          color="tamanio_empresa",
-                          color_discrete_sequence=["#6366f1","#3b82f6","#10b981","#f59e0b"])
-            st.plotly_chart(fig3, use_container_width=True)
 
     with tab_b:
         col_b1, col_b2 = st.columns(2)
