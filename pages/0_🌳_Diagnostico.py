@@ -54,7 +54,7 @@ if not df.empty:
             fig = px.treemap(df_top, path=['nombre_sector'], values='gastos_totales', color='gastos_totales', 
                              color_continuous_scale='Tealgrn')
             fig.update_traces(customdata=df["gastos_totales"] / 1_000_000,  # millions 
-                              hovertemplate="sector: %{label}<br>gastos totales: %{customdata:.2f}B<extra></extra>")
+                              hovertemplate="<extra></extra>")
             fig.update_layout(height=480, margin=dict(t=20, l=10, r=10, b=10))
             st.plotly_chart(fig, use_container_width=True)
 
@@ -65,7 +65,7 @@ if not df.empty:
             fig_pie = px.pie(df_pie, values='gastos_totales', names='nombre_sector', hole=0.4,
                              color_discrete_sequence=px.colors.sequential.Tealgrn)
             fig_pie.update_traces(textinfo='percent+label', textposition='outside', customdata=df["gastos_totales"] / 1_000_000,
-                                  hovertemplate="gastos totales: %{customdata:.2f}B<extra></extra>")
+                                  hovertemplate="<extra></extra>")
             fig_pie.update_layout(height=420, showlegend=False, margin=dict(t=20, b=20))
             st.plotly_chart(fig_pie, use_container_width=True)
         with col_t:
