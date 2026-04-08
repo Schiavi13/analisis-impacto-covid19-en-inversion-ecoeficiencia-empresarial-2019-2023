@@ -8,6 +8,10 @@ Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambie
 - Wilder Salas  
 - Bernardo Saldarriaga 
 
+# Presentación
+## YouTube
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rBqbNoKALm4/0.jpg)](https://www.youtube.com/watch?v=rBqbNoKALm4)
+
 ## 🚀 Inicio Rápido
 
 ```bash
