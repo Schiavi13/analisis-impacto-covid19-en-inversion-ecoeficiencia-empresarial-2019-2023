@@ -153,7 +153,6 @@ streamlit run Inicio.py
 |--------|---------------|
 | **Diagnóstico** | KPIs con variación YoY, treemap sectorial, donut chart, tendencia multi-línea, tabla por sector con % ambiental |
 | **COVID-19** | Contraste pre/post pandemia, curva de área con zona COVID, resiliencia sectorial, adopción de inversiones ambientales |
-| **Consultor** | Hallazgos cualitativos por año + métricas cuantitativas + top sectores + mapa de inversiones |
 | **Empresarial** | Búsqueda por ID, KPIs individuales, evolución financiera, radar de inversiones ambientales |
 | **Sectorial** | Distribución por boxplot, benchmarking vs promedio nacional |
 | **Data Science** | Matriz de correlación (heatmap), dispersión logarítmica multidimensional, estadísticas descriptivas |
