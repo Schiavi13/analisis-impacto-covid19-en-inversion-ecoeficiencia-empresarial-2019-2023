@@ -190,4 +190,4 @@ streamlit run Inicio.py
 
 ## 📜 Licencia
 
-Proyecto académico - Análisis de Impacto COVID-19 en Inversión de Ecoeficiencia Empresarial.
+Licencia MIT
