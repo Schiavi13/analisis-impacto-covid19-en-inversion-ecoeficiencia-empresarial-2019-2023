@@ -10,7 +10,7 @@ Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambie
 
 # Presentación
 ## YouTube
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/rBqbNoKALm4/0.jpg)](https://www.youtube.com/watch?v=rBqbNoKALm4)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Ruq__ZODz-o/0.jpg)](https://www.youtube.com/watch?v=Ruq__ZODz-o)
 
 ## 🚀 Inicio Rápido
 
