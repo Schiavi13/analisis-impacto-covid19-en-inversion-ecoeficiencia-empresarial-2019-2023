@@ -12,6 +12,8 @@ Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambie
 ## YouTube
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Ruq__ZODz-o/0.jpg)](https://www.youtube.com/watch?v=Ruq__ZODz-o)
 
+# Ingresa a nuestra aplicación en línea:
+[EcoAnalytics Pro APP](https://ecoeficiencia.streamlit.app/)
 ## 🚀 Inicio Rápido
 
 ```bash
