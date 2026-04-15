@@ -4,6 +4,8 @@ Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambie
 # Colaboradores
 - Melissa González López
     <br>
+    [Linkedin](https://www.linkedin.com/in/melissa-gonzalezlopez/)
+    <br>
     [Github](https://github.com/meliGonzalez25)
 - Luis Fernando Martínez
     <br>
@@ -14,6 +16,8 @@ Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambie
     <br>
     [Github](https://github.com/ErikaOF)
 - Wilder Salas
+    <br>
+    [Linkedin](https://www.linkedin.com/in/wilder-salas-mena/)
     <br>
     [Github](https://github.com/wild9013)
 - Bernardo Saldarriaga
