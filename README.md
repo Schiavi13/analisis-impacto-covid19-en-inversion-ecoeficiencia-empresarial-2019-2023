@@ -2,12 +2,24 @@
 
 Plataforma analítica que evalúa el impacto del COVID-19 en la inversión ambiental empresarial colombiana (2019-2023). Fuente: Departamento Administrativo Nacional de Estadística — www.dane.gov.co 
 # Colaboradores
-- Melissa González López  
-- Luis Fernando Martínez  
-- Erika Osorio Foronda 
-- Wilder Salas  
-- Bernardo Saldarriaga 
-
+- Melissa González López
+    <br>
+    [Github](https://github.com/meliGonzalez25)
+- Luis Fernando Martínez
+    <br>
+    [Linkedin](https://www.linkedin.com/in/luis-f-martinez-m/)
+    <br>
+    [Github](https://github.com/Schiavi13)
+- Erika Osorio Foronda
+    <br>
+    [Github](https://github.com/ErikaOF)
+- Wilder Salas
+    <br>
+    [Github](https://github.com/wild9013)
+- Bernardo Saldarriaga
+    <br>
+    [Github](https://github.com/wild9013)
+  
 # Presentación
 ## YouTube
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Ruq__ZODz-o/0.jpg)](https://www.youtube.com/watch?v=Ruq__ZODz-o)
